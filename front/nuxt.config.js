@@ -49,5 +49,12 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend (config, ctx) {
+      config.devtool = 'hidden-source-map'
+
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'hidden-source-map'
+      }
+    }
   }
 }
