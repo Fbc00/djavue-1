@@ -1,0 +1,10 @@
+.idea/
+.vscode/
+.pytest_cache/
+.git/
+front/
+__pycache__/
+**/__pycache__/
+dockerfile
+.dockerignore
+.gitignore

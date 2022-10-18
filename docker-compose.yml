@@ -4,15 +4,30 @@ services:
   database:
     image: postgres:14.5-alpine
     container_name: djavue-database
+    hostname: djavue-database
     ports:
       - 5432:5432
-    environment:
-      - POSTGRES_DB=djavue
-      - POSTGRES_USER=djavue
-      - POSTGRES_PASSWORD=djavue
-    restart: on-failure
+    env_file:
+      - .env
     volumes:
       - data:/var/lib/postgresql/data
+    restart: on-failure
+
+  back:
+    build: .
+    image: djavue-back:dev
+    container_name: djavue-back
+    hostname: djavue-back
+    command: wait-for-it database:5432 -- sh -c "python manage.py migrate && python manage.py runserver"
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+    depends_on:
+      - database
+    volumes:
+      - .:/back
+    restart: on-failure
 
   front:
     build:
@@ -23,6 +38,8 @@ services:
     command: npm run dev:disable-mock
     ports:
       - 3000:3000
+    depends_on:
+      - back
     volumes:
       - node_modules:/front/node_modules
 

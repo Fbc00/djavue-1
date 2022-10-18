@@ -77,11 +77,11 @@ WSGI_APPLICATION = "djavue.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": config("DB_NAME", default="djavue"),
-        "USER": config("DB_USER", default="djavue"),
-        "PASSWORD": config("DB_PASSWORD", default="djavue"),
-        "HOST": config("DB_HOST", default="localhost"),
-        "PORT": config("DB_PORT", default="5432"),
+        "NAME": config("POSTGRES_DB", default="djavue"),
+        "USER": config("POSTGRES_USER", default="djavue"),
+        "PASSWORD": config("POSTGRES_PASSWORD", default="djavue"),
+        "HOST": config("POSTGRES_HOST", default="localhost"),
+        "PORT": config("POSTGRES_PORT", default="5432"),
     },
 }
 
