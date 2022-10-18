@@ -2,14 +2,20 @@ FROM node:16.13-slim
 
 WORKDIR /front
 
-COPY package.json package.json
-COPY package-lock.json package-lock.json
+RUN apt-get update && \
+    apt-get install -y \
+    wget \
+    net-tools \
+    build-essential
+
+COPY package.json /front/
+COPY package-lock.json /front/
 
 RUN npm ci && \
     npm cache clean --force && \
     npm cache verify
 
-COPY . /front
+COPY . /front/
 
 RUN npm run build
 CMD npm run start
