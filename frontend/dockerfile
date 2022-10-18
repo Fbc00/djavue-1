@@ -2,6 +2,8 @@ FROM node:16.13-slim
 
 WORKDIR /frontend
 
+ENV SHELL=/bin/sh LANG=en_US.UTF-8
+
 RUN apt-get update && \
     apt-get install -y \
     wget \
