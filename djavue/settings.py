@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-!+##0i+wwrpah$wctv^ml3u&imnw=7+p*5bej1xma*-ss#ei!#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -76,12 +76,13 @@ WSGI_APPLICATION = "djavue.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": config("POSTGRES_DB", default="djavue"),
-        "USER": config("POSTGRES_USER", default="djavue"),
-        "PASSWORD": config("POSTGRES_PASSWORD", default="djavue"),
-        "HOST": config("POSTGRES_HOST", default="localhost"),
-        "PORT": config("POSTGRES_PORT", default="5432"),
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("POSTGRES_DB", default="postgres"),
+        "USER": config("POSTGRES_USER", default="postgres"),
+        "PASSWORD": config("POSTGRES_PASSWORD", default="postgres"),
+        # "HOST": config("POSTGRES_HOST", default="localhost"),
+        "HOST": "database",
+        "PORT": config("POSTGRES_PORT", default=5432),
     },
 }
 
