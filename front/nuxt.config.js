@@ -1,4 +1,8 @@
 export default {
+  // https://nuxtjs.org/docs/features/configuration/#edit-host-and-port
+  server: {
+    host: '0.0.0.0'
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'front',
