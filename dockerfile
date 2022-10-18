@@ -4,11 +4,13 @@ WORKDIR /back
 
 RUN apt-get update && \
     apt-get install -y \
-    wait-for-it \
+    wget \
+    net-tools \
     build-essential \
     libpq-dev \
     python3-dev
 
-COPY requirements.txt requirements.txt
+COPY requirements.txt /back/
 RUN pip install --no-cache-dir -r requirements.txt
-COPY . /back
+
+COPY . /back/
