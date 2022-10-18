@@ -4,7 +4,7 @@
 venv/
 .pytest_cache/
 .git/
-front/
+frontend/
 __pycache__/
 **/__pycache__/
 dockerfile

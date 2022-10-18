@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  database:
+  postgres:
     image: postgres:14.5-alpine
     ports:
       - 5432:5432
@@ -17,39 +17,39 @@ services:
       timeout: 5s
       retries: 5
     volumes:
-      - data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     restart: on-failure
 
-  back:
+  django:
     build:
       context: .
       dockerfile: dockerfile
-    image: djavue-back:dev
+    image: djavue-backend:dev
     command: python manage.py runserver 0.0.0.0:8000
     ports:
       - 8000:8000
     env_file:
       - .env
     depends_on:
-      database:
+      postgres:
         condition: service_healthy
     volumes:
-      - .:/back
+      - .:/backend
     restart: on-failure
 
-  front:
+  nuxt:
     build:
-      context: front/
+      context: frontend/
       dockerfile: dockerfile
-    image: djavue-front:dev
+    image: djavue-frontend:dev
     command: npm run dev:disable-mock
     ports:
       - 3000:3000
     depends_on:
-      - back
+      - django
     volumes:
-      - node_modules:/front/node_modules
+      - node_modules:/frontend/node_modules
 
 volumes:
-  data:
+  postgres_data:
   node_modules:

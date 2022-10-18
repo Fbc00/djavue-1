@@ -1,6 +1,6 @@
 FROM node:16.13-slim
 
-WORKDIR /front
+WORKDIR /frontend
 
 RUN apt-get update && \
     apt-get install -y \
@@ -8,14 +8,14 @@ RUN apt-get update && \
     net-tools \
     build-essential
 
-COPY package.json /front/
-COPY package-lock.json /front/
+COPY package.json /frontend/
+COPY package-lock.json /frontend/
 
 RUN npm ci && \
     npm cache clean --force && \
     npm cache verify
 
-COPY . /front/
+COPY . /frontend/
 
 RUN npm run build
 CMD npm run start
