@@ -48,7 +48,8 @@ services:
     ports:
       - 3000:3000
     depends_on:
-      - django
+      django:
+        condition: service_started
     volumes:
       - node_modules:/frontend/node_modules
 
@@ -58,8 +59,10 @@ services:
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - django
-      - nuxt
+      django:
+        condition: service_started
+      nuxt:
+        condition: service_started
 
 volumes:
   postgres_data:
