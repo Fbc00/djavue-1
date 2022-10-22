@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    "0.0.0.0",
 ]
 
 # Application definition
@@ -82,7 +83,7 @@ DATABASES = {
         "NAME": config("DJANGO_DB_NAME", default="postgres"),
         "USER": config("DJANGO_DB_USER", default="postgres"),
         "PASSWORD": config("DJANGO_DB_PASSWORD", default="postgres"),
-        "HOST": config("DJANGO_DB_HOST", default="postgres"),
+        "HOST": config("DJANGO_DB_HOST", default="localhost"),
         "PORT": config("DJANGO_DB_PORT", default=5432),
     },
 }
