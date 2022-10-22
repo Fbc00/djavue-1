@@ -39,14 +39,14 @@ services:
       - .:/backend
     restart: on-failure
 
-  nuxt:
+  vite:
     build:
       context: frontend/
       dockerfile: dockerfile
     image: djavue-frontend:dev
     command: npm run dev:disable-mock
     ports:
-      - 3000:3000
+      - 5173:5173
     depends_on:
       django:
         condition: service_started
@@ -61,7 +61,7 @@ services:
     depends_on:
       django:
         condition: service_started
-      nuxt:
+      vite:
         condition: service_started
 
 volumes:
