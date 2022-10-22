@@ -10,11 +10,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "pg_isready -d $POSTGRES_DB -U $POSTGRES_USER"
-        ]
+      test: [ "CMD-SHELL", "pg_isready -d postgres -U postgres" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -53,15 +49,17 @@ services:
       - 3000:3000
     depends_on:
       - django
-      - nginx
     volumes:
       - node_modules:/frontend/node_modules
 
   nginx:
     image: nginx:stable
-    network_mode: "host"
+    network_mode: host
     volumes:
-      - ./nginx/default_local:/etc/nginx/conf.d/default.conf
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - django
+      - nuxt
 
 volumes:
   postgres_data:
