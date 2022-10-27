@@ -20,8 +20,7 @@ def user_login(request):
 
         return JsonResponse(user, status=200)
 
-    if not user:
-        return JsonResponse({}, status=404)
+    return JsonResponse({}, status=404)
 
 
 def user_logout(request):
@@ -30,8 +29,7 @@ def user_logout(request):
 
         return JsonResponse({}, status=200)
 
-    if request.user.is_authenticated is False:
-        return JsonResponse({}, status=401)
+    return JsonResponse({}, status=404)
 
 
 def user_whoami(request):
