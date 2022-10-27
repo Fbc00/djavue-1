@@ -1,3 +1,49 @@
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
-# Create your views here.
+from user.serializer import user_to_dict_json
+
+
+@csrf_exempt
+@require_POST
+def user_login(request):
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+
+    user = authenticate(username=username, password=password)
+
+    if user:
+        login(request, user)
+        user = user_to_dict_json(user)
+
+        return JsonResponse(user, status=200)
+
+    if not user:
+        return JsonResponse({}, status=404)
+
+
+def user_logout(request):
+    if request.user.is_authenticated is True:
+        logout(request)
+
+        return JsonResponse({}, status=200)
+
+    if request.user.is_authenticated is False:
+        return JsonResponse({}, status=401)
+
+
+def user_whoami(request):
+    user = (
+        {
+            "user": user_to_dict_json(request.user),
+            "authenticated": True,
+        }
+        if request.user.is_authenticated
+        else {
+            "authenticated": False,
+        }
+    )
+
+    return JsonResponse(user)

@@ -1,4 +1,7 @@
+psycopg2]
+
 django
-psycopg2
-python-decouple
+django-cors-headers
 django_extensions
+
+python-decouple
