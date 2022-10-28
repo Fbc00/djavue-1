@@ -17,7 +17,7 @@ def test_user_login_with_valid_user(rf, user, session_middleware):
     response_content = json.loads(response.content)
 
     assert response.status_code == 200
-    assert user.id == response_content["id"]
+    assert user.id == response_content.get("id")
 
 
 def test_user_login_with_invalid_user(rf, user, session_middleware):
@@ -65,7 +65,7 @@ def test_user_whoami_with_logged_user(rf, user):
     response_content = json.loads(response.content)
 
     assert response.status_code == 200
-    assert response_content["authenticated"] is True
+    assert response_content.get("authenticated") is True
 
 
 def test_user_whoami_with_anonymous_user(rf, anonymous_user):
@@ -75,4 +75,4 @@ def test_user_whoami_with_anonymous_user(rf, anonymous_user):
     response_content = json.loads(response.content)
 
     assert response.status_code == 404
-    assert response_content["authenticated"] is False
+    assert response_content.get("authenticated") is False
