@@ -1,4 +1,5 @@
 import pytest
+from django.contrib.auth.models import AnonymousUser
 from model_bakery import baker
 
 
@@ -17,3 +18,8 @@ def user(db, faker):
     user.save()
 
     return user
+
+
+@pytest.fixture
+def anonymous_user(db):
+    return AnonymousUser()

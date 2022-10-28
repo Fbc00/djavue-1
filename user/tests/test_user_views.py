@@ -1,8 +1,6 @@
 import json
-from pickletools import anyobject
 from unittest.mock import ANY
 
-from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 
 from user.views import user_login, user_logout, user_whoami
@@ -60,9 +58,9 @@ def test_user_whoami_with_logged_user(rf, user):
     assert user.email == response_content["user"]["email"]
 
 
-def test_user_whoami_with_anonymous_user(rf):
+def test_user_whoami_with_anonymous_user(rf, anonymous_user):
     request = rf.get("/api/user/whoami/")
-    request.user = AnonymousUser()
+    request.user = anonymous_user
 
     response = user_whoami(request)
     response_content = json.loads(response.content)
