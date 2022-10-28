@@ -1,6 +1,8 @@
 import json
+from pickletools import anyobject
 from unittest.mock import ANY
 
+from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 
 from user.views import user_login, user_logout, user_whoami
@@ -43,7 +45,7 @@ def test_user_logout(rf, user):
     assert response_content == {}
 
 
-def test_user_whoami(rf, user):
+def test_user_whoami_with_logged_user(rf, user):
     request = rf.get("/api/user/whoami/")
     request.user = user
 
@@ -51,7 +53,19 @@ def test_user_whoami(rf, user):
     response_content = json.loads(response.content)
 
     assert response.status_code == 200
+    assert response_content["authenticated"] is True
     assert user.id == response_content["user"]["id"]
     assert user.first_name == response_content["user"]["first_name"]
     assert user.last_name == response_content["user"]["last_name"]
     assert user.email == response_content["user"]["email"]
+
+
+def test_user_whoami_with_anonymous_user(rf):
+    request = rf.get("/api/user/whoami/")
+    request.user = AnonymousUser()
+
+    response = user_whoami(request)
+    response_content = json.loads(response.content)
+
+    assert response.status_code == 200
+    assert response_content["authenticated"] is False
