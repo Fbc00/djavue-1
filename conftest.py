@@ -1,5 +1,8 @@
+from unittest.mock import ANY
+
 import pytest
 from django.contrib.auth.models import AnonymousUser
+from django.contrib.sessions.middleware import SessionMiddleware
 from model_bakery import baker
 
 
@@ -23,3 +26,8 @@ def user(db, faker):
 @pytest.fixture
 def anonymous_user(db):
     return AnonymousUser()
+
+
+@pytest.fixture
+def session_middleware():
+    return SessionMiddleware(get_response=ANY)
