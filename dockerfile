@@ -19,4 +19,4 @@ COPY requirements.txt /backend/
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /backend/
-# TODO: CMD
+CMD gunicorn
