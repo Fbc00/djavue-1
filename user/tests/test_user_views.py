@@ -3,12 +3,12 @@ from unittest.mock import ANY
 
 from django.contrib.sessions.middleware import SessionMiddleware
 
-from user.views import user_login, user_whoami
+from user.views import user_login, user_logout, user_whoami
 
 
 def test_user_login(rf, user):
     request = rf.post(
-        "/api/user/login",
+        "/api/user/login/",
         data={
             "id": user.id,
             "username": user.username,
@@ -27,6 +27,20 @@ def test_user_login(rf, user):
     assert user.first_name == response_content["first_name"]
     assert user.last_name == response_content["last_name"]
     assert user.email == response_content["email"]
+
+
+def test_user_logout(rf, user):
+    request = rf.get("/api/user/logout/")
+    request.user = user
+
+    middleware = SessionMiddleware(get_response=ANY)
+    middleware.process_request(request)
+
+    response = user_logout(request)
+    response_content = json.loads(response.content)
+
+    assert response.status_code == 200
+    assert response_content == {}
 
 
 def test_user_whoami(rf, user):
