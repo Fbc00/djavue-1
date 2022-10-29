@@ -4,7 +4,7 @@
       >I am a Default Layout</span
     >
   </header>
-  <main>
+  <main v-bind="$attrs">
     <slot />
   </main>
 </template>

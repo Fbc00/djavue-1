@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router"
 
-import DefaultLayout from "~/layouts/DefaultLayout.vue"
 import ErrorLayout from "~/layouts/ErrorLayout.vue"
 
-import HomePage from "~/pages/HomePage.vue"
+import LandingPage from "~/pages/LandingPage.vue"
 import ErrorPage from "~/pages/ErrorPage.vue"
 
 const router = createRouter({
@@ -11,16 +10,12 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: HomePage,
-      meta: {
-        layout: {
-          name: DefaultLayout,
-        },
-      },
+      name: "landing",
+      component: LandingPage,
     },
     {
       path: "/:pathMatch(.*)*",
+      name: "not-found",
       component: ErrorPage,
       meta: {
         layout: {
