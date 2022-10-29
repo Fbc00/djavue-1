@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "djavue",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --port 5174",
