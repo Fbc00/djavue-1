@@ -1,15 +1,15 @@
 <template>
-  <div class="home-page">
-    <div class="home-page__title">404</div>
-    <div class="home-page__subtitle">
+  <div class="error-page">
+    <div class="error-page__title">404</div>
+    <div class="error-page__subtitle">
       The page that you are looking for doesn't exists.
     </div>
-    <div class="home-page__information">Please go back to your home.</div>
+    <div class="error-page__information">Please go back to your home.</div>
   </div>
 </template>
 
 <style lang="scss">
-  .home-page {
+  .error-page {
     @apply flex flex-col items-center justify-center;
 
     &__title {
