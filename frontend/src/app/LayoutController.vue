@@ -1,7 +1,5 @@
 <template>
-  <component
-    :is="layout"
-    v-bind="layout">
+  <component :is="layout">
     <slot />
   </component>
 </template>
