@@ -8,6 +8,11 @@ module.exports = {
     "./src/pages/**/*.{vue,js}",
   ],
   theme: {
+    fontFamily: {
+      sans: ["Roboto"],
+      mono: ["Roboto Mono"],
+      serif: ["Roboto Slab"],
+    },
     extend: {},
   },
   plugins: [],
