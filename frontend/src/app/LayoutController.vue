@@ -1,7 +1,7 @@
 <template>
   <component
     :is="layout"
-    v-bind="route?.meta?.layout">
+    v-bind="layout">
     <slot />
   </component>
 </template>
@@ -10,7 +10,8 @@
   import { computed } from "vue"
   import { useRoute } from "vue-router"
 
-  const DefaultLayout = "WhiteEmptyLayout"
+  import DefaultLayout from "~/layouts/DefaultLayout.vue"
+
   const route = useRoute()
   const layout = computed(() => route?.meta?.layout?.name || DefaultLayout)
 </script>

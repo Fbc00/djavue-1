@@ -5,5 +5,5 @@
 </template>
 
 <script setup>
-import LayoutController from "@/app/Layout.vue"
+  import LayoutController from "~/app/LayoutController.vue"
 </script>
