@@ -1,9 +1,9 @@
 <template>
-  <LayoutController>
+  <LayoutHandler>
     <RouterView />
-  </LayoutController>
+  </LayoutHandler>
 </template>
 
 <script setup>
-  import LayoutController from "~/app/LayoutController.vue"
+  import LayoutHandler from "~/app/LayoutHandler.vue"
 </script>

@@ -24,7 +24,7 @@ def user_login(request):
 
 
 def user_logout(request):
-    if request.user.is_authenticated is True:
+    if request.user.is_authenticated:
         logout(request)
 
         return JsonResponse({}, status=200)
