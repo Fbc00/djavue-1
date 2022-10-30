@@ -74,5 +74,5 @@ def test_user_whoami_with_anonymous_user(rf, anonymous_user):
     response = user_whoami(request)
     response_content = json.loads(response.content)
 
-    assert response.status_code == 404
+    assert response.status_code == 200
     assert response_content.get("authenticated") is False
